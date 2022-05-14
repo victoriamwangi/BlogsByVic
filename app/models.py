@@ -1,6 +1,7 @@
 from . import db, login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash 
+from datetime import datetime
 
 
 
@@ -29,3 +30,15 @@ class User(db.Model, UserMixin):
     
     def __repr__(self):
         return f'User{self.username}'
+    
+
+class Blog(db.Model):
+    __tablename__ = 'blogs'
+    id = db.Column(db.Integer, primary_key= True)
+    blog_title = db.Column(db.String(255))
+    blog_content = db.Column(db.String(4000))
+    posted = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
