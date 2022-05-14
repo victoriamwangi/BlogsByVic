@@ -16,19 +16,14 @@
       <a class="navbar-brand" href="/"> Pitches </a>
     </div>
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav ">
+      <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
-        
+
         {% if current_user.is_authenticated %}
         <li>
           <a href="{{url_for('main.profile',uname=current_user.username)}}"
             >Profile</a
           >
-          <li>
-          <a href="{{url_for('main.new_pitch',uname=current_user.username)}}"
-            >Post Pitch</a
-          >
-        </li>
         </li>
         <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
         {% else %}
