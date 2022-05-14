@@ -25,6 +25,11 @@
             >Profile</a
           >
         </li>
+        <li>
+          <a href="{{url_for('main.new_blog',uname=current_user.username)}}"
+            >Post Blog</a
+          >
+        </li>
         <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
         {% else %}
         <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
