@@ -8,7 +8,9 @@ from .forms import BlogForm
 
 @main.route('/')
 def index():
-    return(render_template('index.html'))
+    blogs = Blog.query.all()   
+    
+    return render_template('index.html', blogs=blogs) 
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -30,7 +32,7 @@ def new_blog(uname):
   
 
     if form.validate_on_submit():      
-        new_blog = Blog(blog_title = form.blog_title.data, blog_content = form.blog_content.data)
+        new_blog = Blog(blog_title = form.blog_title.data, blog_content = form.blog_content.data, user_id = current_user.id)
         db.session.add(new_blog)
         db.session.commit()
 
@@ -38,10 +40,3 @@ def new_blog(uname):
     return render_template('new_blog.html', blog_form=form, user=uname )
 
 
-@main.route('/blogs')
-@login_required
-def  allblogs():
-    blogs = Blog.query.all()
-    
-    return render_template('all_blogs.html', blogs= blogs)
-    

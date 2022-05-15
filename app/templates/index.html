@@ -1,3 +1,20 @@
 {%extends 'base.html'%} {%block content%}
-<h1>INDEX PAGE</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+              {% for blog in blogs%}
+
+  <h4 class="tit" style="color: purple">TITLE:{{blog.blog_title}}</h4>
+  <p>Blog Content: {{blog.blog_content}}</p>
+
+  {% endfor%}
+</div>
+
+        </div>
+
+        <div class="col-lg-2"></div>
+
+    </div
+
 {%endblock%}

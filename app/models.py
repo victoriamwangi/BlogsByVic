@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255))
     pass_secure = db.Column(db.String())
     bio = db.Column(db.String())
+    blogs = db.relationship('Blog', backref = 'users', lazy= 'dynamic')
     
     
     @property
@@ -38,6 +39,7 @@ class Blog(db.Model):
     blog_title = db.Column(db.String(255))
     blog_content = db.Column(db.String(4000))
     posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id') )
     
     def save_pitch(self):
         db.session.add(self)
