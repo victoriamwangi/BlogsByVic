@@ -7,7 +7,9 @@
 
   <h4 class="tit" style="color: purple">TITLE:{{blog.blog_title}}</h4>
   <p>Blog Content: {{blog.blog_content}}</p>
-
+<a name="" id="" class="btn btn-primary"
+ href = "{{url_for('main.new_comment',user= current_user.username, blog_id=blog.id)}}"
+ role="button">COMMENT</a>
   {% endfor%}
 </div>
 
