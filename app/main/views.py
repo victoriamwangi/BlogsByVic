@@ -8,7 +8,9 @@ from .forms import BlogForm
 
 @main.route('/')
 def index():
-    blogs = Blog.query.all()   
+    
+# User.query.order_by(text("popularity desc, date_created desc")).limit(10).all()
+    blogs = Blog.query.order_by(Blog.posted.desc()).all()   
     
     return render_template('index.html', blogs=blogs) 
 
