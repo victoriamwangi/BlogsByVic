@@ -21,6 +21,11 @@ def create_app(config_name):
     app.register_blueprint(main_blueprint)
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
+    from .errors import errors as errors_blueprint
+    app.register_blueprint(errors_blueprint)
+    
+    
+    
     
     db.init_app(app)
     bootstrap.init_app(app)

@@ -67,14 +67,24 @@ def new_comment( blog_id):
         return redirect(url_for('index.html'))
     return render_template('comments.html', blog_form = form, user = user,blog = blog_id)
 
-@main.route('/blog/<int:blog_id>/delete' , methods=['POST', 'GET'])
+@main.route('/delete/<int:blog_id>/' , methods=['POST', 'GET'])
 @login_required
 def delete_blog( blog_id):
     blog = Blog.query.get_or_404(blog_id)
     if blog.user_id != current_user:
-        abort(403)
+        return redirect(url_for('main.index'))
     db.session.delete(blog)
     db.session.commit()
-    flash('Your blog has been deleted')
-    return redirect(url_for('index.html'), blog_id = blog_id)
+    flash('Your blog has been deleted, success')
+    return redirect(url_for('main.index'))
+# @posts.route("/post/<int:post_id>/delete", methods=["POST"])
+# @login_required
+# def delete_post(post_id):
+#     post = Post.query.get_or_404(post_id)
+#     if post.author != current_user:
+#         abort(403)
+#     db.session.delete(post)
+#     db.session.commit()
+#     flash('Your pitch has been deleted!', 'success')
+#     return redirect(url_for('main.home'))
    
