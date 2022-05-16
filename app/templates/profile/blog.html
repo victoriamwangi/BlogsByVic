@@ -1,0 +1,23 @@
+{%extends 'base.html'%} {%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+              {% for blog in blogs%}
+
+  <h4 class="tit" style="color: purple">TITLE:{{blog.blog_title}}</h4>
+  <p>Blog Content: {{blog.blog_content}}</p>
+<p>{{blog.timeposted}}</p>
+<a name="" id="" class="btn btn-primary"
+ href = "{{url_for('main.new_comment',user= current_user.username, blog_id=blog.id)}}"
+ role="button">COMMENT</a>
+  {% endfor%}
+</div>
+
+        </div>
+
+        <div class="col-lg-2"></div>
+
+    </div
+
+{%endblock%}

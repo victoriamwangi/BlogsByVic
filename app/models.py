@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     pass_secure = db.Column(db.String())
     bio = db.Column(db.String())
     blogs = db.relationship('Blog', backref = 'users', lazy= 'dynamic')
-    reviews = db.relationship('Comment', backref='user', lazy="dynamic")
+    # comments = db.relationship('Comment', backref='user', lazy="dynamic")
     
     
     @property

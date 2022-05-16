@@ -1,2 +1,2 @@
-{%extends 'bootstrap/base.html'%} {%block navbar%} {% include 'navbar.html'%}
-{%endblock%}
+{%extends 'bootstrap/base.html'%} {% block style%} {{ super() }} {% endblock %}
+{%block navbar%} {% include 'navbar.html'%} {%endblock%}

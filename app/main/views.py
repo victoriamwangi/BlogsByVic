@@ -1,16 +1,17 @@
 
-from flask import render_template, request, redirect, url_for, abort
+from flask import render_template,  redirect, url_for, abort
 from . import main
 from .. import db
 from ..models import User, Blog, Comment
 from flask_login import login_required, current_user
 from .forms import BlogForm, CommentForm
-
+from ..request import get_blogQuotes
 @main.route('/')
 def index():
     blogs = Blog.query.order_by(Blog.posted.desc()).all()   
-    
-    return render_template('index.html', blogs=blogs) 
+    # blogQuote= get_blogQuotes('')
+    blogQuote = get_blogQuotes()
+    return render_template('index.html', blogs=blogs, blogQuote= blogQuote) 
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -59,8 +60,9 @@ def new_comment( blog_id):
     form = CommentForm()
     
     if form.validate_on_submit():
-        new_comment = Comment(body = form.body.data, blog_id = blog, commenter = user)
-        new_comment.save_comment()
+        new_comment = Comment(comment_body = form.comment_body.data, blog_id = blog, commenter = current_user.id)
+        db.session.add(new_comment)
+        db.session.commit()
         
         return redirect(url_for('index.html'))
     return render_template('comments.html', blog_form = form, user = user,blog = blog_id)
