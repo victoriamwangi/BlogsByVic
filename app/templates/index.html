@@ -24,20 +24,10 @@
           name=""
           id="comdel"
           class="btn btn-primary comment"
-          href="{{url_for('main.new_comment',user= current_user.username, blog_id=blog.id)}}"
+          href="#"
           role="button"
           style="color: purple"
           >COMMENT</a
-        >
-
-        <a
-          name=""
-          id="comdel"
-          class="btn btn-primary delete"
-          href="{{url_for('main.delete_blog', blog_id=blog.id)}}"
-          role="button"
-          style="color: red"
-          >DELETE</a
         >
       </div>
       {% endfor%}

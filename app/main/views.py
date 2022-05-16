@@ -16,10 +16,12 @@ def index():
 @main.route('/user/<uname>')
 def profile(uname):
     user = current_user
+    blogs = Blog.query.filter_by(user_id = current_user.id).all()
+    
     if user is None:
         abort(404)
 
-    return render_template("profile/profile.html", user=uname)
+    return render_template("profile/profile.html", user=uname, blogs= blogs)
 
 @main.route('/user/<uname>/blogs/new', methods = ['GET', 'POST'])
 @login_required
@@ -48,11 +50,12 @@ def add(uname):
             
     return render_template('comments.html')
 
-@main.route('/blog/<int:blog_id>/new' , methods=['GET', 'POST'])
+@main.route('/blog/<int:blog_id>' , methods=['GET', 'POST'])
 @login_required
-def new_comment( blog_id):
+def new_comment( id):
     user = current_user.username
-    blog = Blog.query.filter_by(id = blog_id).first()
+    blog = Blog.query.get_or_404(id)
+    blog_comments = Comment.query.filter_by(log_id = id).all()
     
     if user is None:
         return redirect(url_for('auth/login.html'))
@@ -65,26 +68,26 @@ def new_comment( blog_id):
         db.session.commit()
         
         return redirect(url_for('index.html'))
-    return render_template('comments.html', blog_form = form, user = user,blog = blog_id)
+    return render_template('comments.html', blog_form = form, blog_comments= blog_comments, user = user,blog = blog)
 
-@main.route('/delete/<int:blog_id>/' , methods=['POST', 'GET'])
+@main.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delete_blog( blog_id):
-    blog = Blog.query.get_or_404(blog_id)
-    if blog.user_id != current_user:
-        return redirect(url_for('main.index'))
+def delete_blog(id):
+    blog = Blog.query.get_or_404(id)
+    if blog.user != current_user:
+        abort(403)
     db.session.delete(blog)
     db.session.commit()
-    flash('Your blog has been deleted, success')
-    return redirect(url_for('main.index'))
-# @posts.route("/post/<int:post_id>/delete", methods=["POST"])
-# @login_required
-# def delete_post(post_id):
-#     post = Post.query.get_or_404(post_id)
-#     if post.author != current_user:
-#         abort(403)
-#     db.session.delete(post)
-#     db.session.commit()
-#     flash('Your pitch has been deleted!', 'success')
-#     return redirect(url_for('main.home'))
-   
+ 
+    return redirect(url_for('main.theblog'))
+@main.route('/view/<int:id>', methods=['GET', 'POST'])
+@login_required
+def view(id):
+    blog = Blog.query.get_or_404(id)
+    blog_comments = Comment.query.filter_by(blog_id=id).all()
+    comment_form = CommentForm()
+    if comment_form.validate_on_submit():
+        new_comment = Comment(blog_id=id, comment=comment_form.comment.data, user=current_user)
+        new_comment.save_comment()
+    return render_template('view.html', blog=blog, blog_comments=blog_comments, comment_form=comment_form)
+

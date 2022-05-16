@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255))
     pass_secure = db.Column(db.String())
     bio = db.Column(db.String())
-    blogs = db.relationship('Blog', backref = 'users', lazy= 'dynamic')
+    blogs = db.relationship('Blog', backref = 'users',passive_deletes=True, lazy= 'dynamic')
     # comments = db.relationship('Comment', backref='user', lazy="dynamic")
     
     
@@ -39,7 +39,7 @@ class Blog(db.Model):
     blog_title = db.Column(db.String(255))
     blog_content = db.Column(db.String(4000))
     posted = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id') )
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='CASCADE'), nullable=False)
     comments = db.relationship('Comment', backref = 'comment', lazy= 'dynamic')
     
     def save_pitch(self):
@@ -50,9 +50,9 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id= db.Column(db.Integer, primary_key = True)
     comment_body = db.Column(db.String(100), nullable= False)
-    commenter = db.Column(db.Integer, db.ForeignKey("users.id"))
+    commenter = db.Column(db.Integer, db.ForeignKey("users.id",ondelete='CASCADE'))
     timeposted = db.Column(db.DateTime, default=datetime.utcnow)
-    blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'), nullable= False)
+    blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id',ondelete='CASCADE'), nullable= False)
     
     all_comments = []
     
@@ -67,8 +67,8 @@ class Comment(db.Model):
         
     @classmethod
     def get_comments(cls, id):
-        reviews = Comment.query.filter_by(id=id).all()
-        return reviews
+        comments = Comment.query.filter_by(id=id).all()
+        return comments
     
     @classmethod
     def get_comments(cls, id):
