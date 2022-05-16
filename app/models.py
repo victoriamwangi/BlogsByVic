@@ -4,12 +4,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 
-
-class Quote:
-    def __init__(self, author, quote):
-        self.author = author
-        self.quote = quote
-
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))

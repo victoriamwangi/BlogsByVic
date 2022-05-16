@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #11d1f3;
+    background-color: purple;
 }
 
 .navbar-brand {
@@ -24,4 +24,33 @@
     box-shadow: 1px 1px 5px grey;
     margin-top: 2vw;
     padding: 2vw;
+}
+
+.blogs span {
+    color: red !important;
+}
+
+.pquote {
+    color: red;
+}
+
+.quotes {
+    color: purple;
+    width: 13vw;
+    padding-top: 2vw;
+}
+
+#comdel {
+    border: 1px solid purple;
+    background: transparent;
+    width: 10vw;
+    margin: 2vw 2vw;
+}
+
+.comment {
+    color: purple;
+}
+
+.delete {
+    color: red;
 }

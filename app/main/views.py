@@ -1,5 +1,5 @@
 
-from flask import render_template,  redirect, url_for, abort
+from flask import render_template,  redirect, url_for, abort, flash
 from . import main
 from .. import db
 from ..models import User, Blog, Comment
@@ -36,7 +36,7 @@ def new_blog(uname):
         db.session.add(new_blog)
         db.session.commit()
 
-        return redirect(url_for('.profile', uname=user.username))
+        return redirect(url_for('.index', uname=user.username))
     return render_template('new_blog.html', blog_form=form, user=uname )
 
 @main.route('/add/<uname>/blogs/new')
@@ -66,3 +66,15 @@ def new_comment( blog_id):
         
         return redirect(url_for('index.html'))
     return render_template('comments.html', blog_form = form, user = user,blog = blog_id)
+
+@main.route('/blog/<int:blog_id>/delete' , methods=['POST', 'GET'])
+@login_required
+def delete_blog( blog_id):
+    blog = Blog.query.get_or_404(blog_id)
+    if blog.user_id != current_user:
+        abort(403)
+    db.session.delete(blog)
+    db.session.commit()
+    flash('Your blog has been deleted')
+    return redirect(url_for('index.html'), blog_id = blog_id)
+   
