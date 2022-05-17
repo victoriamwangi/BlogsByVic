@@ -90,7 +90,7 @@ def delete_comment(comment_id):
 @login_required
 def update(id):
     blog = Blog.query.get_or_404(id)
-    if blog.user != current_user:
+    if blog.user_id != current_user.id:
         abort(403)
     form = BlogForm()
     if form.validate_on_submit():
@@ -102,6 +102,6 @@ def update(id):
     elif request.method == 'GET':
         form.blog_title.data = blog.blog_title
         form.blog_content.data = blog.blog_content
-    return render_template('update.html', form=form)
+    return render_template('update.html', blog_form=form)
 
 
