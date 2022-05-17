@@ -18,13 +18,16 @@ content%}
     <div class="col-md-4">
       {%for comment in blog_comments%}
 
-      <p style="font-size: 1px">{{comment.comment_body}}</p>
+      <p>{{comment.body}}</p>
       <p>{{comment.timeposted.strftime("%Y-%m-%d")}}</p>
+      <p>
+        {{comment.commenter.username}}
 
-      <a href="{{url_for('main.delete_comment', comment_id=comment.id)}}"
-        ><button>Delete Coment</button></a
-      >
-      {%endfor%}
+        <a href="{{url_for('main.delete_comment', comment_id=comment.id)}}"
+          ><button>Delete Coment</button></a
+        >
+        {%endfor%}
+      </p>
     </div>
   </div>
 </div>

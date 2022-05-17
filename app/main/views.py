@@ -50,26 +50,6 @@ def add(uname):
             
     return render_template('comments.html')
 
-# @main.route('/blog/<int:blog_id>' , methods=['GET', 'POST'])
-# @login_required
-# def new_comment( id):
-#     user = current_user.username
-#     blog = Blog.query.get_or_404(id)
-#     blog_comments = Comment.query.filter_by(log_id = id).all()
-    
-#     if user is None:
-#         return redirect(url_for('auth/login.html'))
-        
-#     form = CommentForm()
-    
-#     if form.validate_on_submit():
-#         new_comment = Comment(comment_body = form.comment_body.data, blog_id = blog, commenter = current_user.id)
-#         db.session.add(new_comment)
-#         db.session.commit()
-        
-#         return redirect(url_for('index.html'))
-#     return render_template('comments.html', blog_form = form, blog_comments= blog_comments, user = user,blog = blog)
-
 @main.route('/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_blog(id):
@@ -93,4 +73,16 @@ def view_blog(id):
         new_comment.save_comment()
          
     return render_template('view_blog.html', blog=blog, blog_comments=blog_comments, comment_form=comment_form)
+
+@main.route('/delete_comment/<int:comment_id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(comment_id):
+    comment =Comment.query.get_or_404(comment_id)
+    if (comment.commenter) != current_user.id:
+        abort(403)
+    db.session.delete(comment)
+    db.session.commit()
+    flash('The comment has been deleted!')
+    return redirect (url_for('main.index'))
+
 
