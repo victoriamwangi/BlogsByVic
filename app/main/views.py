@@ -1,5 +1,5 @@
 
-from flask import render_template,  redirect, url_for, abort, flash
+from flask import render_template, redirect, url_for, abort, flash, request
 from . import main
 from .. import db
 from ..models import User, Blog, Comment
@@ -83,6 +83,25 @@ def delete_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
     flash('The comment has been deleted!')
-    return redirect (url_for('main.index'))
+    return redirect (url_for('main.index '))#h
+
+
+@main.route('/update/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update(id):
+    blog = Blog.query.get_or_404(id)
+    if blog.user != current_user:
+        abort(403)
+    form = BlogForm()
+    if form.validate_on_submit():
+        blog.blog_title = form.blog_title.data
+        blog.blog_content = form.blog_content.data
+        db.session.commit()
+
+        return redirect(url_for('main.index'))#h
+    elif request.method == 'GET':
+        form.blog_title.data = blog.blog_title
+        form.blog_content.data = blog.blog_content
+    return render_template('update.html', form=form)
 
 

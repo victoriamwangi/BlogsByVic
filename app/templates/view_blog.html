@@ -26,6 +26,14 @@ content%}
         <a href="{{url_for('main.delete_comment', comment_id=comment.id)}}"
           ><button>Delete Coment</button></a
         >
+        <a
+          name=""
+          id=""
+          class="btn btn-primary"
+          href="{{url_for('main.update', id=blog.id)}}"
+          role="button"
+          >UPDATE BLOG</a
+        >
         {%endfor%}
       </p>
     </div>

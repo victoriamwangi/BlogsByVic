@@ -10,3 +10,4 @@ class BlogForm(FlaskForm):
 class CommentForm(FlaskForm):
     body =StringField('Comment', validators= [DataRequired()])
     submit= SubmitField('Submit')
+
