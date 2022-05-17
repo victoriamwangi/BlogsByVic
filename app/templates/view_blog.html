@@ -17,7 +17,7 @@ content%}
     </div>
     <div class="col-md-4">
       {%for comment in blog_comments%}
-      <p>{{comment.user.username}}</p>
+
       <p style="font-size: 1px">{{comment.comment_body}}</p>
       <p>{{comment.timeposted.strftime("%Y-%m-%d")}}</p>
 
