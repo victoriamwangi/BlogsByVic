@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, TextAreaField
+from wtforms import StringField, SubmitField,  TextAreaField
 from wtforms.validators import DataRequired 
 
 class BlogForm(FlaskForm):
@@ -8,5 +8,5 @@ class BlogForm(FlaskForm):
     submit= SubmitField('Submit')
     
 class CommentForm(FlaskForm):
-    comment_body =StringField('Comment', validators= [DataRequired()])
+    body =StringField('Comment', validators= [DataRequired()])
     submit= SubmitField('Submit')

@@ -42,28 +42,29 @@ class Blog(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='CASCADE'), nullable=False)
     comments = db.relationship('Comment', backref = 'comment', lazy= 'dynamic')
     
-    def save_pitch(self):
+    def save_blog(self):
         db.session.add(self)
         db.session.commit()
         
 class Comment(db.Model):
     __tablename__ = 'comments'
     id= db.Column(db.Integer, primary_key = True)
-    comment_body = db.Column(db.String(100), nullable= False)
+    body = db.Column(db.String(100), nullable= False)
     commenter = db.Column(db.Integer, db.ForeignKey("users.id",ondelete='CASCADE'))
     timeposted = db.Column(db.DateTime, default=datetime.utcnow)
     blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id',ondelete='CASCADE'), nullable= False)
     
     all_comments = []
     
-    def __init__(self, blog_id, title, review):
-        self.blog_id = blog_id
-        self.title = title
-        self.review = review
+    # def __init__(self, blog_id, title, review):
+    #     self.blog_id = blog_id
+    #     self.title = title
+    #     self.review = review
     
     def save_comment(self):        
         db.session.add(self)
         db.session.commit()
+
         
     @classmethod
     def get_comments(cls, id):
