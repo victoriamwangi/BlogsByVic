@@ -60,7 +60,7 @@
 #loginfrm {
     box-shadow: 1px 1px 5px grey;
     padding: 3vw;
-    height: 30vw;
+    height: 35vw;
     width: 37vw !important;
     border-radius: 10px;
 }
@@ -87,4 +87,24 @@ a span {
 h4 {
     color: purple;
     font-weight: bold;
+}
+
+textarea {
+    height: 20vw !important;
+    background-color: red;
+}
+
+.postblog {
+    box-shadow: 1px 1px 5px grey;
+    padding: 2vw;
+    border-radius: 10px;
+}
+
+.smallbtn {
+    width: 10vw !important;
+    background-color: purple;
+}
+
+.addcom {
+    color: purple;
 }

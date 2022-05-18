@@ -13,18 +13,22 @@ content%}
       <a
         name=""
         id=""
-        class="btn btn-primary"
+        class="btn btn-primary smallbtn"
         href="{{url_for('main.update', id=blog.id)}}"
         role="button"
         >UPDATE BLOG</a
       >
-      <a href="{{url_for('main.delete_blog', id=blog.id)}}"
-        ><button>Delete Blog</button></a
+      <a
+        name=""
+        id=""
+        class="btn btn-primary smallbtn"
+        href="{{url_for('main.delete_blog', id=blog.id)}}"
+        role="button"
+        >DELETE BLOG</a
       >
-      <p>heheh</p>
     </div>
     <div class="col-lg-4">
-      <h1>Add a comment</h1>
+      <h3 class="addcom">Add a comment</h3>
       {{wtf.quick_form(comment_form)}}
     </div>
     <div class="col-md-4">
@@ -36,7 +40,7 @@ content%}
         {{comment.commenter.username}}
 
         <a href="{{url_for('main.delete_comment', comment_id=comment.id)}}"
-          ><button>Delete Comment</button></a
+          ><button class="smallbtn">Delete Comment</button></a
         >
 
         {%endfor%}

@@ -58,11 +58,24 @@ def add(uname):
 @login_required
 def delete_blog(id):
     blog = Blog.query.get_or_404(id)
-    if blog.user_id != current_user:
+    if blog.user_id != current_user.id:
         abort(403)
-    delete_blog(blog)
+    db.session.delete(blog)
+    db.session.commit()
  
-    return redirect(url_for('main.view_blog'))
+    return redirect (url_for('main.index' ))
+@main.route('/delete_comment/<int:comment_id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(comment_id):
+    comment =Comment.query.get_or_404(comment_id)
+    if (comment.commenter) != current_user.id:
+        abort(403)
+    db.session.delete(comment)
+    db.session.commit()
+    flash('The comment has been deleted!')
+    return redirect (url_for('main.index'))#h
+
+    
 @main.route('/view/<int:id>', methods=['GET', 'POST'])
 @login_required
 def view_blog(id):
@@ -77,16 +90,7 @@ def view_blog(id):
          
     return render_template('view_blog.html', blog=blog, blog_comments=blog_comments, comment_form=comment_form)
 
-@main.route('/delete_comment/<int:comment_id>', methods=['GET', 'POST'])
-@login_required
-def delete_comment(comment_id):
-    comment =Comment.query.get_or_404(comment_id)
-    if (comment.commenter) != current_user.id:
-        abort(403)
-    db.session.delete(comment)
-    db.session.commit()
-    flash('The comment has been deleted!')
-    return redirect (url_for('main.index'))#h
+
 
 
 @main.route('/update/<int:id>', methods=['GET', 'POST'])

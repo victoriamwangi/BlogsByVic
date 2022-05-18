@@ -4,7 +4,12 @@ content%}
 <div class="container">
   <div class="row">
     <div class="col-md-2"></div>
-    <div class="col-md-8">{{wtf.quick_form(blog_form)}}{{simplemde.load}}</div>
+    <div class="col-md-8">
+      <div class="postblog">
+        <h4>CREATE BLOG</h4>
+        {{wtf.quick_form(blog_form)}}{{simplemde.load}}
+      </div>
+    </div>
     <div class="col-md-2"></div>
   </div>
 </div>
