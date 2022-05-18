@@ -2,9 +2,9 @@
 %}
 <div class="container">
   <div class="row">
-    <div class="col-md-2"></div>
+    <div class="col-lg-2"></div>
 
-    <div class="col-md-8">
+    <div class="col-lg-8">
       <div class="container-fluid" id="form-log">
         <h4>LOGIN IN</h4>
 
@@ -18,14 +18,16 @@
         </div>
         {% endfor %}
         <!-- Login form -->
-        {{wtf.quick_form(login_form)}}
-        <p>
-          Don't have an account?
-          <a href="{{url_for('auth.register')}}">Sign up here</a>
-        </p>
+        <div class="loginfrm" id="loginfrm">
+          {{wtf.quick_form(login_form)}}
+          <p>
+            Don't have an account?
+            <a href="{{url_for('auth.register')}}"><span>Sign up here</span></a>
+          </p>
+        </div>
       </div>
     </div>
-    <div clas="col-md-2"></div>
+    <div clas="col-lg-2"></div>
   </div>
 </div>
 

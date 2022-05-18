@@ -5,13 +5,17 @@ from .. import db
 from ..models import User, Blog, Comment
 from flask_login import login_required, current_user
 from .forms import BlogForm, CommentForm
-from ..request import get_blogQuotes
+# from ..request import get_blogQuotes
+
+
+
 @main.route('/')
 def index():
     blogs = Blog.query.order_by(Blog.posted.desc()).all()   
     # blogQuote= get_blogQuotes('')
-    blogQuote = get_blogQuotes()
-    return render_template('index.html', blogs=blogs, blogQuote= blogQuote) 
+    # blogQuote = get_blogQuotes()
+    return render_template('index.html', blogs=blogs ) 
+# blogQuote= blogQuote
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -54,12 +58,11 @@ def add(uname):
 @login_required
 def delete_blog(id):
     blog = Blog.query.get_or_404(id)
-    if blog.user != current_user:
+    if blog.user_id != current_user:
         abort(403)
-    db.session.delete(blog)
-    db.session.commit()
+    delete_blog(blog)
  
-    return redirect(url_for('main.theblog'))
+    return redirect(url_for('main.view_blog'))
 @main.route('/view/<int:id>', methods=['GET', 'POST'])
 @login_required
 def view_blog(id):
@@ -83,7 +86,7 @@ def delete_comment(comment_id):
     db.session.delete(comment)
     db.session.commit()
     flash('The comment has been deleted!')
-    return redirect (url_for('main.index '))#h
+    return redirect (url_for('main.index'))#h
 
 
 @main.route('/update/<int:id>', methods=['GET', 'POST'])

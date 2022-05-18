@@ -20,7 +20,8 @@
     font-size: 1.2vw;
 }
 
-.blogs {
+.blogs,
+.eachblog {
     box-shadow: 1px 1px 5px grey;
     margin-top: 2vw;
     padding: 2vw;
@@ -53,4 +54,37 @@
 
 .delete {
     color: red;
+}
+
+#registerFrm,
+#loginfrm {
+    box-shadow: 1px 1px 5px grey;
+    padding: 3vw;
+    height: 30vw;
+    width: 37vw !important;
+    border-radius: 10px;
+}
+
+#registerFrm {
+    height: 40vw;
+}
+
+form input {
+    border: 4vw solid purple;
+}
+
+.btn {
+    width: 100%;
+    background-color: purple;
+    color: white;
+    font-weight: bold;
+}
+
+a span {
+    color: purple;
+}
+
+h4 {
+    color: purple;
+    font-weight: bold;
 }

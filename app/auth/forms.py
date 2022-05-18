@@ -8,7 +8,7 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', validators =[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password_confirm = PasswordField('Password Confirm', validators=[DataRequired(), EqualTo('password_confirm', message='Password does not match')])
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('SIGN UP')
     
     def validate_email(self, data_field):
         if User.query.filter_by(email = data_field.data).first():
@@ -23,7 +23,7 @@ class LoginForm(FlaskForm):
     email = StringField('Your Email Address',validators=[DataRequired(),Email()])
     password = PasswordField('Password',validators =[DataRequired()])
     remember = BooleanField('Remember me')
-    submit = SubmitField('Sign In')
+    submit = SubmitField('SIGN IN')
   
     
 
