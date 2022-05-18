@@ -4,11 +4,7 @@
 <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}" />
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2">
-      <div class="container quotes">
-        <p class="pquote"><QUOTES</p>
-      </div>
-    </div>
+    <div class="col-lg-1"></div>
     <div class="col-lg-8">
       {% for blog in blogs%}
       <div class="blogs">
@@ -33,7 +29,14 @@
       {% endfor%}
     </div>
 
-    <div class="col-lg-2"></div>
+    <div class="col-lg-3">
+      <div class="container quotes">
+        <h4 class="pquote">QUOTES</h4>
+
+        <p>{{quotes.quote}}</p>
+        <p>~~{{quotes.author}}</p>
+      </div>
+    </div>
 
     {%endblock%}
   </div>

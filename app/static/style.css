@@ -31,7 +31,21 @@
     color: red !important;
 }
 
+.quotes {
+    box-shadow: 1px 1px 5px grey;
+    border-radius: 5px;
+    margin-top: 3vw;
+}
+
 .pquote {
+    color: red;
+}
+
+.pquote p:first-child {
+    color: black;
+}
+
+.pquote p:last-child {
     color: red;
 }
 

@@ -5,7 +5,7 @@ from .. import db
 from ..models import User, Blog, Comment
 from flask_login import login_required, current_user
 from .forms import BlogForm, CommentForm
-# from ..request import get_blogQuotes
+from ..request import get_Quotes
 
 
 
@@ -14,9 +14,9 @@ from .forms import BlogForm, CommentForm
 def index():
     blogs = Blog.query.order_by(Blog.posted.desc()).all()   
     # blogQuote= get_blogQuotes('')
-    # blogQuote = get_blogQuotes()
-    return render_template('index.html', blogs=blogs ) 
-# blogQuote= blogQuote
+    quotes = get_Quotes()
+    return render_template('index.html', blogs=blogs, quotes= quotes ) 
+
 
 @main.route('/user/<uname>')
 def profile(uname):
