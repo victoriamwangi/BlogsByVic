@@ -33,16 +33,16 @@ content%}
     </div>
     <div class="col-md-4">
       {%for comment in blog_comments%}
-
+<div class="comment">
       <p>{{comment.body}}</p>
-      <p>{{comment.timeposted.strftime("%Y-%m-%d")}}</p>
+      <p>~~{{comment.timeposted.strftime("%Y-%m-%d")}}</p>
       <p>
         {{comment.commenter.username}}
 
         <a href="{{url_for('main.delete_comment', comment_id=comment.id)}}"
-          ><button class="smallbtn">Delete Comment</button></a
+          ><button class="delcom">Delete Comment</button></a
         >
-
+</div>
         {%endfor%}
       </p>
     </div>

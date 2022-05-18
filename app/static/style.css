@@ -108,3 +108,20 @@ textarea {
 .addcom {
     color: purple;
 }
+
+.delcom {
+    background-color: transparent;
+    border: 2px solid purple;
+    border-radius: 5px;
+    color: red;
+}
+
+.comment {
+    box-shadow: 1px 1px 5px grey;
+    padding: 5px 3px;
+    margin-top: 2vw;
+}
+
+.comment p {
+    color: black !important;
+}
