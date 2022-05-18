@@ -8,6 +8,7 @@ content%}
       <div class="postblog">
         <h4>CREATE BLOG</h4>
         {{wtf.quick_form(blog_form)}}{{simplemde.load}}
+        <p>~~{{comment.timeposted.strftime("%Y-%m-%d")}}</p>
       </div>
     </div>
     <div class="col-md-2"></div>

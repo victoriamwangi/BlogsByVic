@@ -9,6 +9,7 @@ from .forms import BlogForm, CommentForm
 
 
 
+
 @main.route('/')
 def index():
     blogs = Blog.query.order_by(Blog.posted.desc()).all()   
@@ -59,7 +60,7 @@ def add(uname):
 def delete_blog(id):
     blog = Blog.query.get_or_404(id)
     if blog.user_id != current_user.id:
-        abort(403)
+        return render_template('errors/403.html')
     db.session.delete(blog)
     db.session.commit()
  

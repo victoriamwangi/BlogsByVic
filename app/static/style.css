@@ -125,3 +125,10 @@ textarea {
 .comment p {
     color: black !important;
 }
+
+.errors {
+    width: 40vw;
+    color: red;
+    margin: 0 auto;
+    margin-top: 5vw;
+}
