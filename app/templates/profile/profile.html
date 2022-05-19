@@ -14,14 +14,14 @@
       <div class="eachblog">
         <h4 class="tit" style="color: purple">TITLE:{{blog.blog_title}}</h4>
         <p>Pitch Content: {{blog.blog_content}}</p>
-        <p style="color: red">Category: {{blog.category_name}}</p>
+
         <a
           name=""
           id="comdel"
           class="btn btn-primary comment"
           href="{{url_for('main.view_blog', id=blog.id)}}"
           role="button"
-          style="color: purple"
+          style="color: red"
           >VIEW</a
         >
       </div>
